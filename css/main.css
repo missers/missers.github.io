@@ -2102,7 +2102,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff82ff;
+  background: #f258ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3192,4 +3192,11 @@ hr {
 .post-body p a:hover {
   color: #0477ab;
   text-decoration: underline;
+}
+.post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
 }
