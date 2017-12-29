@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="jquery,集合," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="azraelmiss" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="操作jQuery集合前言 在通过jQuery选择器获取到jQuery集合后，我们也许会想更加细致的划分集合，或者只要其中的单个元素，这时候就需要我们来用jQuery的函数对集合进行操作了。  创建新HTML元素一种典型的情况是：当需要从部获取数据时，使用Ajax后，返回的数据是JSON或者XML格式，需要我们显示为一个表格。 $(&amp;#39;html&amp;#39;)创建基础的html元素    $(&amp;#">
+<meta name="keywords" content="jquery,集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二、操作jQuery集合">
+<meta property="og:url" content="http://missers.github.io/2017/12/29/1/index.html">
+<meta property="og:site_name" content="azraelmiss">
+<meta property="og:description" content="操作jQuery集合前言 在通过jQuery选择器获取到jQuery集合后，我们也许会想更加细致的划分集合，或者只要其中的单个元素，这时候就需要我们来用jQuery的函数对集合进行操作了。  创建新HTML元素一种典型的情况是：当需要从部获取数据时，使用Ajax后，返回的数据是JSON或者XML格式，需要我们显示为一个表格。 $(&amp;#39;html&amp;#39;)创建基础的html元素    $(&amp;#">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T14:25:51.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二、操作jQuery集合">
+<meta name="twitter:description" content="操作jQuery集合前言 在通过jQuery选择器获取到jQuery集合后，我们也许会想更加细致的划分集合，或者只要其中的单个元素，这时候就需要我们来用jQuery的函数对集合进行操作了。  创建新HTML元素一种典型的情况是：当需要从部获取数据时，使用Ajax后，返回的数据是JSON或者XML格式，需要我们显示为一个表格。 $(&amp;#39;html&amp;#39;)创建基础的html元素    $(&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://missers.github.io/2017/12/29/1/"/>
+
+
+
+
+
+  <title>二、操作jQuery集合 | azraelmiss</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/missers" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">azraelmiss</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">欢迎来到我的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间轴
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://missers.github.io/2017/12/29/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="azraelmiss">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/400H.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="azraelmiss">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二、操作jQuery集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-29T22:12:47+08:00">
+                2017-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">jquery</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,339
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="操作jQuery集合"><a href="#操作jQuery集合" class="headerlink" title="操作jQuery集合"></a>操作jQuery集合</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在通过<code>jQuery</code>选择器获取到jQuery集合后，我们也许会想更加细致的划分集合，或者只要其中的单个元素，这时候就需要我们来用<code>jQuery</code>的函数对集合进行操作了。</p>
+</blockquote>
+<h2 id="创建新HTML元素"><a href="#创建新HTML元素" class="headerlink" title="创建新HTML元素"></a>创建新HTML元素</h2><p>一种典型的情况是：当需要从部获取数据时，使用Ajax后，返回的数据是JSON或者XML格式，需要我们显示为一个表格。</p>
+<p><code>$(&#39;html&#39;)</code>创建基础的html元素  </p>
+<ul>
+<li><code>$(&#39;&lt;div&gt;&#39;)</code>等价于<code>$(&#39;&lt;div/&gt;&#39;)和$(&#39;&lt;div&gt;&lt;/div&gt;&#39;)</code><br><code>$(&#39;html&#39;, content)</code>创建带有属性或事件的元素</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;img&gt;'</span>, &#123;</span><br><span class="line">    src:<span class="string">'imges/little.bear.png'</span>,</span><br><span class="line">    alt:<span class="string">'Little Bear'</span>,</span><br><span class="line">    title:<span class="string">'hello Bear'</span>,</span><br><span class="line">    click:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        alert($(<span class="keyword">this</span>).attr(<span class="string">'title'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).appendTo(<span class="string">'body'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="管理jQuery集合"><a href="#管理jQuery集合" class="headerlink" title="管理jQuery集合"></a>管理jQuery集合</h2><h3 id="确定集合的大小"><a href="#确定集合的大小" class="headerlink" title="确定集合的大小"></a>确定集合的大小</h3><p><code>jQuery</code>提供了<code>length</code>属性，例如<code>$(&#39;p&#39;).length</code></p>
+<h3 id="从集合获取元素"><a href="#从集合获取元素" class="headerlink" title="从集合获取元素"></a>从集合获取元素</h3><p>有时需要直接访问元素或者执行原生的<code>JavaScript</code>的操作</p>
+<ul>
+<li><code>get(index)</code>,返回一个<code>DOM</code>元素，或者一个<code>DOM</code>元素数组<br>有时我们想获取一个指定元素的<code>jQuery</code>对象，而不是原始元素，可以用<code>$($(&#39;p&#39;).get(2))</code>,看起来有点奇怪，为此jQuery提供了eq()方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>返回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eq(index)</code></td>
+<td>获取指定索引的元素</td>
+<td>包含结果的<code>jQuery</code>集合</td>
+</tr>
+<tr>
+<td><code>first()</code></td>
+<td>获取集合中的第一个元素</td>
+<td>包含结果的<code>jQuery</code>集合</td>
+</tr>
+<tr>
+<td><code>last()</code></td>
+<td>获取集合中的最后一个元素</td>
+<td>包含结果的<code>jQuery</code>集合</td>
+</tr>
+<tr>
+<td><code>toArray()</code></td>
+<td>作为数组返回<code>DOM</code>元素的集合</td>
+<td>以js数组的形式返回集合中的<code>DOM</code>元素</td>
+</tr>
+<tr>
+<td><code>index(element)</code></td>
+<td>反向操作确定集合中元素的索引值</td>
+<td>集合中元素的索引值，没有找到，返回<code>-1</code></td>
+</tr>
+<tr>
+<td><code>index()</code></td>
+<td>无参的，可以查找父节点中元素的索引(兄弟节点)</td>
+<td>其在兄弟节点中的索引</td>
+</tr>
+</tbody>
+</table>
+<p><code>index()</code>无参的:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span> = <span class="string">"main-menu"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span> =<span class="string">"home-link"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>sss<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span> = <span class="string">"pro-link"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>www<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span> = <span class="string">"blog-link"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>blog<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">var index = $('#blog-link').index();//结果是2</span><br></pre></td></tr></table></figure>
+<h3 id="使用关系获取集合"><a href="#使用关系获取集合" class="headerlink" title="使用关系获取集合"></a>使用关系获取集合</h3><p><code>jQuery</code>允许根据<code>DOM</code>元素之间的层级关系获取新的集合</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>parents([selector])</code></td>
+<td>以集合形式返回集合中所有元素的唯一祖先，结果既有直接父节点也有其他高级节点，如果设置选择器，则返回匹配的祖先节点</td>
+</tr>
+<tr>
+<td><code>parent([selector])</code></td>
+<td>返回集合中所有元素的直接父节点元素，结果以集合形式返回，如果设置选择器，则返回匹配的祖先节点</td>
+</tr>
+<tr>
+<td><code>find(selector)</code></td>
+<td>返回集合中每个元素的子节点作为一个集合</td>
+</tr>
+<tr>
+<td><code>nextUtil([selector[,filter]])</code></td>
+<td>返回指定元素的兄弟元素，但不包括匹配选择器的元素</td>
+</tr>
+<tr>
+<td><code>prev([selector])</code></td>
+<td>返回匹配元素的的直接前兄弟节点的集合，如果设置选择器，则只会选择匹配的前兄弟节点元素</td>
+</tr>
+<tr>
+<td><code>children([selector])</code></td>
+<td>返回集合中元素的所有子元素，过滤选择器的参数可选</td>
+</tr>
+<tr>
+<td><code>closest([selector])</code></td>
+<td>返回包含匹配指定选择器的每个元素最近上级节点的集合</td>
+</tr>
+<tr>
+<td><code>siblings([selector])</code></td>
+<td>以集合形式返回集合中元素的兄弟节点，元素可以被选择器过滤</td>
+</tr>
+</tbody>
+</table>
+<h3 id="分割集合"><a href="#分割集合" class="headerlink" title="分割集合"></a>分割集合</h3><p>一旦有了集合，那么或许想通过添加或者删除来调整集合中的元素，那么就需要分割集合</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add(selector)</code></td>
+<td>创建<code>jQuery</code>对象，并且添加<code>selector</code>到指定元素到集合中，参数可以是多种</td>
+</tr>
+<tr>
+<td><code>addClass()</code></td>
+<td>接收一个样式名作为参数，然后把样式添加给集合中的元素</td>
+</tr>
+<tr>
+<td><code>not(selector)</code></td>
+<td>创建不包含选择器参数匹配元素的新集合，如果传递的是函数，那么会根据每个元素来执行函数，如果返回<code>true</code>删除元素</td>
+</tr>
+<tr>
+<td><code>filter(selector)</code></td>
+<td>和<code>not()</code>类似，只不过当不匹配时会删除元素，也就是返回<code>false</code>删除元素</td>
+</tr>
+<tr>
+<td><code>slice(start[,end])</code></td>
+<td>创建并返回匹配集合中部分元素的新集合</td>
+</tr>
+<tr>
+<td><code>has(selector)</code></td>
+<td>创建并返回新的集合，只包含匹配<code>selector</code>选择器的子元素</td>
+</tr>
+<tr>
+<td><code>map(callback)</code></td>
+<td>在集合中的每个元素上调用<code>callback</code>函数，返回到一个<code>jQuery</code>对象中</td>
+</tr>
+<tr>
+<td><code>each(iterator)</code></td>
+<td>遍历集合中的每个元素，然后为每个元素调入传入的迭代器函数</td>
+</tr>
+</tbody>
+</table>
+<p><code>map()</code>:查询包含所有ID的<code>jQuery</code>对象，返回<code>js</code>数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $allIds = $(<span class="string">'div'</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.id;</span><br><span class="line">&#125;).toArray();</span><br></pre></td></tr></table></figure>
+<p><code>each()</code>:为匹配集合中的每一个元素设置一个属性值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'img'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.alt = <span class="string">'this is image['</span>+ i +<span class="string">']with an id of'</span> + <span class="keyword">this</span>.id</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="集合的其他方法"><a href="#集合的其他方法" class="headerlink" title="集合的其他方法"></a>集合的其他方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is(selector)</code></td>
+<td>确定集合中是否有元素匹配给定的选择器，包含返回<code>true</code>，不包含返回<code>false</code></td>
+</tr>
+<tr>
+<td><code>end()</code></td>
+<td>在链式调用中使用该方法，可以将匹配的集合返回到之前的状态</td>
+</tr>
+<tr>
+<td><code>addBack([selector])</code></td>
+<td>把栈上前一个集合的元属添加到当前集合里，可以选择性提供选择器参数</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>jQuery</code>对象维护了一个内部栈来保存针对匹配元素集合的修改。</li>
+<li>调用<code>end()</code>方法，顶部的集合就会弹出，流出前一个集合来操作后续方法</li>
+<li>调用<code>addBack()</code>方法，他会把栈上前一个集合的元属添加到当前集合里，可以选择性提供选择器参数，会创建一个新的集合</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------END<i class="fa fa-paw"></i>Thanks for your reading-------------</div>
+    
+</div>
+     
+    </div>
+	
+   <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS�� sweetalert ���޸�·�� -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>���ı���:</span><a href="/2017/12/29/1/">二、操作jQuery集合</a></p>
+  <p><span>��������:</span><a href="/" title="���� azraelmiss �ĸ��˲���">azraelmiss</a></p>
+  <p><span>����ʱ��:</span>2017��12��29�� - 22:12</p>
+  <p><span>������:</span>2017��12��29�� - 22:12</p>
+  <p><span>ԭʼ����:</span><a href="/2017/12/29/1/" title="二、操作jQuery集合">http://missers.github.io/2017/12/29/1/</a>
+    <span class="copy-path"  title="���������������"><i class="fa fa-clipboard" data-clipboard-text="http://missers.github.io/2017/12/29/1/"  aria-label="���Ƴɹ���"></i></span>
+  </p>
+  <p><span>���Э��:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">����-����ҵ��ʹ��-��ֹ���� 4.0 ����</a> ת���뱣��ԭ�����Ӽ����ߡ�</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '���Ƴɹ�',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+   </div>
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://ow2gj2hw7.bkt.clouddn.com/17-12-28/57142127.jpg" alt="azraelmiss 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://ow2gj2hw7.bkt.clouddn.com/17-12-28/92063931.jpg" alt="azraelmiss 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+   
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jquery/" rel="tag"># jquery</a>
+          
+            <a href="/tags/集合/" rel="tag"># 集合</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/29/1/" rel="prev" title="一、jQuery选择器">
+                一、jQuery选择器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2152949" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjc0Ni85MzA3"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/400H.jpg"
+                alt="azraelmiss" />
+            
+              <p class="site-author-name" itemprop="name">azraelmiss</p>
+              <p class="site-description motion-element" itemprop="description">别人眼中的码农</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/missers" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://weibo.com/labixmk" target="_blank" title="weibo">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://blog.csdn.net/lucky66666" target="_blank" title="CSDN">
+                    
+                      <i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/7b198cbb0822" target="_blank" title="jianshu">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>jianshu</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作jQuery集合"><span class="nav-number">1.</span> <span class="nav-text">操作jQuery集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新HTML元素"><span class="nav-number">1.2.</span> <span class="nav-text">创建新HTML元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管理jQuery集合"><span class="nav-number">1.3.</span> <span class="nav-text">管理jQuery集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定集合的大小"><span class="nav-number">1.3.1.</span> <span class="nav-text">确定集合的大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从集合获取元素"><span class="nav-number">1.3.2.</span> <span class="nav-text">从集合获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用关系获取集合"><span class="nav-number">1.3.3.</span> <span class="nav-text">使用关系获取集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割集合"><span class="nav-number">1.3.4.</span> <span class="nav-text">分割集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合的其他方法"><span class="nav-number">1.3.5.</span> <span class="nav-text">集合的其他方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">azraelmiss</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">4.3k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>
